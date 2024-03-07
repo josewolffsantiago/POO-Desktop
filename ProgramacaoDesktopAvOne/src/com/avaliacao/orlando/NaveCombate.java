@@ -18,22 +18,22 @@ public class NaveCombate extends NaveEspacial {
 
 	public String atacar() {
 		this.vitima = vitima + 1;
-		return "Nesta hora, o " + armamento + " entrou em ação e fez mais uma vítima";
+		return "Nesta hora, o " + this.armamento + " entrou em ação e fez mais uma vítima";
 	}	
 
 
 
 	@Override
 	public String toString() {
-		return "Nave " + nome + ", e está com a velocidade de " + velocidadeMaxima + "Km/h, com a quantidade de "
-				+ numeroTripulantes + "pessoas trabalhando e possui o total de " + combustivel + " litros de combutível.\nEsta nave está armado com o letal " + 
-				armamento + " e fez o total de " + vitima + " vítima(s)";
+		return "Nave " + nome + ", e está com a velocidade de " + velocidadeMaxima + " Km/h, com a quantidade de "
+				+ numeroTripulantes + " pessoas trabalhando e possui o total de " + combustivel + " litros de combutível.\nEsta nave está armado com o letal " + 
+				this.armamento + " e fez o total de " + vitima + " vítima(s)";
 	}
 	@Override
 	public String toStringDestruida() {
-		return "Nave " + nome + ", e está com a velocidade de " + velocidadeMaxima + "Km/h, com a quantidade de "
-				+ numeroTripulantes + "pessoas trabalhando e possui o total de " + combustivel + " litros de combutível.\nEsta nave está armado com o letal " + 
-				armamento + " e esta nave está irreparável";
+		return "Nave " + nome + ", e está com a velocidade de " + velocidadeMaxima + " Km/h, com a quantidade de "
+				+ numeroTripulantes + " pessoas trabalhando e possui o total de " + combustivel + " litros de combutível.\nEsta nave está armado com o letal " + 
+				this.armamento + " e esta nave está irreparável";
 	}
 	
 

@@ -46,5 +46,7 @@ public abstract class NaveEspacial {
 				+ numeroTripulantes + " pessoas trabalhando e possui o total de " + combustivel + " litros de combutível.]";
 	}
 	public String toStringDestruida();
+	
+	
 
 }

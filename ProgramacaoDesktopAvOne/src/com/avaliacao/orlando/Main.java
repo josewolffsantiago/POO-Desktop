@@ -97,23 +97,13 @@ public class Main {
 						break;
 					}
 					default:
-						throw new IllegalArgumentException("Unexpected value: " + opcaoUser);
+						System.out.println("Opção inválida, desligando a nave\n");
+						System.out.println(naveCargueiro.toString());
+						System.exit(0);
+						break;
 					}
+					
 				}
-
-				// System.out.println("Deseja acelerar ou desacelerar a nave? \n1- Acelerar \n2-
-				// Desacelerar"); //para acionar o MÉTODO ACELERAR OU DESACELERAR
-				// int opcaoAcelerar = scanner.nextInt();
-
-				// if (opcaoAcelerar == 1) {
-				// naveCargueiro.acelerar();
-				// } if (opcaoAcelerar == 2) {
-				// naveCargueiro.desacelerar();
-				// }
-
-				//System.out.println(naveCargueiro.toString());
-
-				//break;
 
 			case 2: // Nave de Passageiro
 				System.out.println("Você selecionou uma nave de Passageiro. \nDigite o nome da Nave: ");
@@ -145,26 +135,53 @@ public class Main {
 				double velocidadePass = scanner.nextDouble();
 
 				navePassenger.setVelocidadeMaxima(velocidadePass);
+				
+				navePassenger.viajar(distanciaPass); //Método para atualizar o combustivel da nave	
 
-				System.out.println("Deseja acelerar ou desacelerar a nave? \n1- Acelerar \n2- Desacelerar"); // para
-																												// acionar
-																												// o
-																												// MÉTODO
-																												// ACELERAR
-																												// OU
-																												// DESACELERAR
-				int opcaoAcelerarPass = scanner.nextInt();
+				System.out.println(navePassenger.toString( ) + "\n");
 
-				if (opcaoAcelerarPass == 1) {
-					navePassenger.acelerar();
+				while (true) {
+					System.out.println("Troque alguns parâmetros da sua nave" + navePassenger.nome + ": \n1- Acelerar \n2- Desacelerar \n3- Abastecer \n4- Embarcar Passageiros");
+					int opcaoUser = scanner.nextInt();
+
+					switch (opcaoUser) {
+					case 1: {
+						navePassenger.acelerar();
+						System.out.println("Nave aumentou a velocidade para " + navePassenger.getVelocidadeMaxima() + " Km/h" );
+
+						break;
+
+					}
+					case 2: {
+						navePassenger.desacelerar();
+						System.out.println("Nave diminui a velocidade para " + navePassenger.getVelocidadeMaxima() + " Km/h" );
+						break;
+					}
+					case 3: {
+						System.out.println("Sua nave possui cerca de " + navePassenger.combustivel + " litros. Digite a quantidade de abastecimento:");
+						double abastecimento = scanner.nextDouble();
+						navePassenger.abastecer(abastecimento);
+						System.out.println("Sua nave possui " + navePassenger.combustivel + " litros de combustível. Faça uma boa viagem");
+						break;
+					}
+						
+					case 4: {
+						System.out.println("Sua nave tem " + navePassenger.getNumeroPassageiros() + " pessoas embarcadas. \nDigite a quantidade de pessoas que irão embarcar:");
+						int embarqueAdicional = scanner.nextInt();
+						navePassenger.embarcar(embarqueAdicional);
+						System.out.println("Embarque realizado com sucesso. A Nave está transportando " + navePassenger.getNumeroPassageiros() + " pessoas");							
+											
+						break;
+					}
+					default:
+						System.out.println("Opção inválida, desligando a nave\n");
+						System.out.println(navePassenger.toString());
+						System.exit(0);
+						break;
+					}
+					
 				}
-				if (opcaoAcelerarPass == 2) {
-					navePassenger.desacelerar();
-				}
-
-				System.out.println("\n" + navePassenger.toString());
-
-				break;
+			
 			case 3: // Nave de Combate
 
 				System.out.println("Você selecionou uma nave de Combate. \nDigite o nome da Nave: ");
@@ -194,43 +211,67 @@ public class Main {
 
 				naveGuerra.setVelocidadeMaxima(velocidadeComb);
 
-				System.out.println("Deseja acelerar ou desacelerar a nave? \n1- Acelerar \n2- Desacelerar"); // para
-																												// acionar
-																												// o
-																												// MÉTODO
-																												// ACELERAR
-																												// OU
-																												// DESACELERAR
-				int opcaoAcelerarComb = scanner.nextInt();
+				naveGuerra.viajar(distanciaComb); //Método para atualizar o combustivel da nave	
 
-				if (opcaoAcelerarComb == 1) {
-					naveGuerra.acelerar();
+				System.out.println(naveGuerra.toString( ) + "\n");
+
+				while (true) {
+					System.out.println("Troque alguns parâmetros da sua nave" + naveGuerra.nome + ": \n1- Acelerar \n2- Desacelerar \n3- Abastecer \n4- Ver Armamento \n5- Atirar");
+					int opcaoUser = scanner.nextInt();
+
+					switch (opcaoUser) {
+					case 1: {
+						naveGuerra.acelerar();
+						System.out.println("Nave aumentou a velocidade para " + naveGuerra.getVelocidadeMaxima() + " Km/h" );
+
+						break;
+
+					}
+					case 2: {
+						naveGuerra.desacelerar();
+						System.out.println("Nave diminui a velocidade para " + naveGuerra.getVelocidadeMaxima() + " Km/h" );
+						break;
+					}
+					case 3: {
+						System.out.println("Sua nave possui cerca de " + naveGuerra.combustivel + " litros. Digite a quantidade de abastecimento:");
+						double abastecimento = scanner.nextDouble();
+						naveGuerra.abastecer(abastecimento);
+						System.out.println("Sua nave possui " + naveGuerra.combustivel + " litros de combustível. Faça uma boa viagem");
+						break;
+					}
+					
+					case 4: {
+						System.out.println(naveGuerra.armamento() + "\n");
+						
+						break;
+					}
+						
+					case 5: {
+						System.out.println("Um inimigo foi avistado a frente. Deseja continuar com o ataque? \n1- Sim \n2- Não");
+						int opcaoAtacar = scanner.nextInt();
+						if (opcaoAtacar == 1) {
+							System.out.println(naveGuerra.atacar() + "\n");
+							System.out.println(naveGuerra.toString() + "\n");
+
+						} else {
+							System.out.println("Sua nave de guerra não atacou e foi destruída" + "\n");
+							System.out.println(naveGuerra.toStringDestruida());
+							break;
+						}
+						
+						break;
+					}
+					default:
+						System.out.println("Opção inválida, desligando a nave\n");
+						System.out.println(naveGuerra.toString());
+						System.exit(0);
+						break;
+					}
+					
 				}
-				if (opcaoAcelerarComb == 2) {
-					naveGuerra.desacelerar();
-				}
 
-				System.out.println(
-						"Sua nave de Combate está equipada com um armamento. Quer saber qual? \n1- Sim \n2- Não \n");
-				int opcaoArmamento = scanner.nextInt();
-				if (opcaoArmamento == 1) {
-					System.out.println(naveGuerra.armamento() + "\n");
-				}
 
-				System.out.println("Um inimigo foi avistado a frente. Deseja atacar? \n1- Sim \n2- Não");
-				int opcaoAtacar = scanner.nextInt();
-				if (opcaoAtacar == 1) {
-					System.out.println(naveGuerra.atacar() + "\n");
 
-				} else {
-					System.out.println("Sua nave de guerra não atacou e foi destruída" + "\n");
-					System.out.println(naveGuerra.toStringDestruida());
-					break;
-				}
-
-				System.out.println(naveGuerra.toString() + "\n");
-
-				break;
 			}
 		}
 

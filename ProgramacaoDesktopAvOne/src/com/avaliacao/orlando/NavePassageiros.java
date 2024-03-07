@@ -10,9 +10,23 @@ public class NavePassageiros extends NaveEspacial {
 		super(nome, velocidadeMaxima, numeroTripulantes, combustivel);
 		this.numeroPassageiros = numeroPassageiros;
 	}
+	
+	
 
-	public int embarcar(int numeroPassageiros) {
-		return this.numeroPassageiros = numeroPassageiros;
+	public int getNumeroPassageiros() {
+		return numeroPassageiros;
+	}
+
+
+
+	public void setNumeroPassageiros(int numeroPassageiros) {
+		this.numeroPassageiros = numeroPassageiros;
+	}
+
+
+	
+	public void embarcar(int numero) {
+		this.numeroPassageiros = this.numeroPassageiros + numero;
 	}
 	@Override
 	public String toString() {
