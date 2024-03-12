@@ -1,6 +1,8 @@
 package com.avaliacao.orlando;
 
 public class NaveCarga extends NaveEspacial{
+	
+
 	private double capacidadeCarga;
 	private double carga;
 	
@@ -18,9 +20,9 @@ public class NaveCarga extends NaveEspacial{
 
 
 
-	public NaveCarga(String nome, double velocidadeMaxima, int numeroTripulantes, double combustivel,
+	public NaveCarga(String nome, double velocidadeMaxima, double velocidade, int numeroTripulantes, double combustivel,
 			double capacidadeCarga, double carga) {
-		super(nome, velocidadeMaxima, numeroTripulantes, combustivel);
+		super(nome, velocidadeMaxima, velocidade, numeroTripulantes, combustivel);
 		this.capacidadeCarga = capacidadeCarga;
 		this.carga = carga;
 	}
@@ -46,7 +48,7 @@ public class NaveCarga extends NaveEspacial{
 	
 	@Override
 	public String toString() {
-		return "Nave " + nome + " é uma nave de CARGA e está com a velocidade de " + velocidadeMaxima + " Km/h, com a quantidade de "
+		return "Nave " + nome + " é uma nave de CARGA, tem a velocidade máxima de " + velocidadeMaxima + " e está com a velocidade atual de " + velocidade + " Km/h, com a quantidade de "
 				+ numeroTripulantes + " pessoas trabalhando e possui o total de " + combustivel + " litros de combutível. \nEsta nave possui cerca de " +
 				capacidadeCarga + " Kg de capacidade e está carregando cerca de " + carga + " Kg de carga";
 	}

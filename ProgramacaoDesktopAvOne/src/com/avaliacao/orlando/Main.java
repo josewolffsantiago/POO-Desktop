@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
-
+		
 		while (true) {
 			System.out.print(
 					"Selecione o tipo de Nave Espacial: \n1 - Nave de Carga \n2 - Nave de Passageiros \n3 - Nave de Combate \n");
@@ -14,7 +14,7 @@ public class Main {
 			switch (opcao) {
 			case 1: // Nave de Carga
 
-				System.out.println("Você selecionou uma nave de carga. \nDigite o nome da Nave: ");
+				System.out.println("Você selecionou uma nave de carga. Você irá atribuir todos os parâmetros da sua nave. \nDigite o nome da Nave: ");
 				Scanner name = new Scanner(System.in);
 				String nome = name.nextLine();
 
@@ -36,9 +36,9 @@ public class Main {
 					System.out.println("Peso acima do permitido dentro da Nave, perigo de queda, tente novamente");
 					break;
 				}
-
-				NaveCarga naveCargueiro = new NaveCarga(nome, 0, numeroTripulantes, combustivel, capacidadeCarga,
+				NaveCarga naveCargueiro = new NaveCarga(nome, 0, 0, numeroTripulantes, combustivel, capacidadeCarga,
 						carga);
+				
 
 				System.out.println("Digite a distância a percorrer: ");
 				double distancia = scanner.nextDouble();
@@ -51,28 +51,32 @@ public class Main {
 				naveCargueiro.viajar(distancia); //Método para atualizar o combustivel da nave		
 				
 
-				System.out.println("Digite a acelaração da Nave: ");
+				System.out.println("Digite a velocidade máxima da Nave: ");
 				double velocidade = scanner.nextDouble();
 
 				naveCargueiro.setVelocidadeMaxima(velocidade);
 				
 				System.out.println(naveCargueiro.toString( ) + "\n");
 
-				while (true) {
-					System.out.println("Troque alguns parâmetros da sua nave" + naveCargueiro.nome + ": \n1- Acelerar \n2- Desacelerar \n3- Abastecer \n4- Carregar");
+				while (true) { //Modo do usuário para utilizar a aeronave
+					System.out.println("Troque alguns parâmetros da sua nave " + naveCargueiro.getNome() + ": \n1- Acelerar \n2- Desacelerar \n3- Abastecer \n4- Carregar \n5- Nova Jornada");
 					int opcaoUser = scanner.nextInt();
 
 					switch (opcaoUser) {
 					case 1: {
+						if( naveCargueiro.getVelocidade() < naveCargueiro.getVelocidadeMaxima()) {
 						naveCargueiro.acelerar();
-						System.out.println("Nave aumentou a velocidade para " + naveCargueiro.getVelocidadeMaxima() + " Km/h" );
-
+						System.out.println("Nave aumentou a velocidade para " + naveCargueiro.getVelocidade() + " Km/h" );
+						} else { 
+							System.out.println("Nave atingiu a velocidade máxima");
+						}
 						break;
+						
 
 					}
 					case 2: {
 						naveCargueiro.desacelerar();
-						System.out.println("Nave diminui a velocidade para " + naveCargueiro.getVelocidadeMaxima() + " Km/h" );
+						System.out.println("Nave diminui a velocidade para " + naveCargueiro.getVelocidade() + " Km/h" );
 						break;
 					}
 					case 3: {
@@ -96,6 +100,15 @@ public class Main {
 						}						
 						break;
 					}
+					case 5: {
+						System.out.println("Sua nave " + naveCargueiro.getNome() + " já percorreu " + distancia + ". \nDigite uma nova jornada:");
+						double distanciaAdicionalCarga = scanner.nextDouble();
+						naveCargueiro.viajar(distanciaAdicionalCarga); //Método para atualizar o combustivel da nave
+						distancia = distancia + distanciaAdicionalCarga; 
+						System.out.println(naveCargueiro.toString());
+						break;
+					}
+						
 					default:
 						System.out.println("Opção inválida, desligando a nave\n");
 						System.out.println(naveCargueiro.toString());
@@ -106,7 +119,7 @@ public class Main {
 				}
 
 			case 2: // Nave de Passageiro
-				System.out.println("Você selecionou uma nave de Passageiro. \nDigite o nome da Nave: ");
+				System.out.println("Você selecionou uma nave de Passageiro. Você irá atribuir todos os parâmetros da sua nave. \nDigite o nome da Nave: ");
 				Scanner namePassenger = new Scanner(System.in);
 				String nomePassenger = namePassenger.nextLine();
 
@@ -128,10 +141,10 @@ public class Main {
 					break;
 				}
 
-				NavePassageiros navePassenger = new NavePassageiros(nomePassenger, 0, numeroTripulantesPass,
+				NavePassageiros navePassenger = new NavePassageiros(nomePassenger, 0, 0, numeroTripulantesPass,
 						combustivelPass, passageiros);
 
-				System.out.println("Digite a acelaração da Nave: ");
+				System.out.println("Digite a velocidade máxima da Nave: ");
 				double velocidadePass = scanner.nextDouble();
 
 				navePassenger.setVelocidadeMaxima(velocidadePass);
@@ -141,20 +154,22 @@ public class Main {
 				System.out.println(navePassenger.toString( ) + "\n");
 
 				while (true) {
-					System.out.println("Troque alguns parâmetros da sua nave" + navePassenger.nome + ": \n1- Acelerar \n2- Desacelerar \n3- Abastecer \n4- Embarcar Passageiros");
+					System.out.println("Troque alguns parâmetros da sua nave" + navePassenger.getNome() + ": \n1- Acelerar \n2- Desacelerar \n3- Abastecer \n4- Embarcar Passageiros \n5- Nova Jornada");
 					int opcaoUser = scanner.nextInt();
 
 					switch (opcaoUser) {
 					case 1: {
+						if( navePassenger.getVelocidade() < navePassenger.getVelocidadeMaxima()) {
 						navePassenger.acelerar();
-						System.out.println("Nave aumentou a velocidade para " + navePassenger.getVelocidadeMaxima() + " Km/h" );
-
+						System.out.println("Nave aumentou a velocidade para " + navePassenger.getVelocidade() + " Km/h" );
+						} else { 
+							System.out.println("Nave atingiu a velocidade máxima");
+						}
 						break;
-
 					}
 					case 2: {
 						navePassenger.desacelerar();
-						System.out.println("Nave diminui a velocidade para " + navePassenger.getVelocidadeMaxima() + " Km/h" );
+						System.out.println("Nave diminui a velocidade para " + navePassenger.getVelocidade() + " Km/h" );
 						break;
 					}
 					case 3: {
@@ -173,6 +188,14 @@ public class Main {
 											
 						break;
 					}
+					case 5: {
+						System.out.println("Sua nave " + navePassenger.getNome() + " já percorreu " + distanciaPass + ". \nDigite uma nova jornada:");
+						double distanciaAdicionalPass = scanner.nextDouble();
+						navePassenger.viajar(distanciaAdicionalPass); //Método para atualizar o combustivel da nave
+						distanciaPass = distanciaPass + distanciaAdicionalPass; 
+						System.out.println(navePassenger.toString());
+						break;
+					}
 					default:
 						System.out.println("Opção inválida, desligando a nave\n");
 						System.out.println(navePassenger.toString());
@@ -184,7 +207,7 @@ public class Main {
 			
 			case 3: // Nave de Combate
 
-				System.out.println("Você selecionou uma nave de Combate. \nDigite o nome da Nave: ");
+				System.out.println("Você selecionou uma nave de Combate. Você irá atribuir todos os parâmetros da sua nave. \nDigite o nome da Nave: ");
 				Scanner nameComb = new Scanner(System.in);
 				String nomeComb = nameComb.nextLine();
 
@@ -194,8 +217,8 @@ public class Main {
 				System.out.println("Digite o valor em litros de combustível no abastecimento:");
 				double combustivelComb = scanner.nextDouble();
 
-				NaveCombate naveGuerra = new NaveCombate(nomeComb, 0.0, numeroTripulantesComb, combustivelComb,
-						"teste");
+				NaveCombate naveGuerra = new NaveCombate(nomeComb, 0.0, 0, numeroTripulantesComb, combustivelComb,
+						"teste",0);
 
 				System.out.println("Digite a distância a percorrer: ");
 				double distanciaComb = scanner.nextDouble();
@@ -206,7 +229,7 @@ public class Main {
 					break;
 				}
 
-				System.out.println("Digite a acelaração da Nave: ");
+				System.out.println("Digite a velocidade máxima da Nave: ");
 				double velocidadeComb = scanner.nextDouble();
 
 				naveGuerra.setVelocidadeMaxima(velocidadeComb);
@@ -216,20 +239,20 @@ public class Main {
 				System.out.println(naveGuerra.toString( ) + "\n");
 
 				while (true) {
-					System.out.println("Troque alguns parâmetros da sua nave" + naveGuerra.nome + ": \n1- Acelerar \n2- Desacelerar \n3- Abastecer \n4- Ver Armamento \n5- Atirar");
+					System.out.println("Troque alguns parâmetros da sua nave" + naveGuerra.getNome() + ": \n1- Acelerar \n2- Desacelerar \n3- Abastecer \n4- Ver Armamento \n5- Atirar \n6- Nova Jornada");
 					int opcaoUser = scanner.nextInt();
 
 					switch (opcaoUser) {
 					case 1: {
 						naveGuerra.acelerar();
-						System.out.println("Nave aumentou a velocidade para " + naveGuerra.getVelocidadeMaxima() + " Km/h" );
+						System.out.println("Nave aumentou a velocidade para " + naveGuerra.getVelocidade() + " Km/h" );
 
 						break;
 
 					}
 					case 2: {
 						naveGuerra.desacelerar();
-						System.out.println("Nave diminui a velocidade para " + naveGuerra.getVelocidadeMaxima() + " Km/h" );
+						System.out.println("Nave diminui a velocidade para " + naveGuerra.getVelocidade() + " Km/h" );
 						break;
 					}
 					case 3: {
@@ -259,6 +282,14 @@ public class Main {
 							break;
 						}
 						
+						break;
+					}
+					case 6: {
+						System.out.println("Sua nave " + naveGuerra.getNome() + " já percorreu " + distanciaComb + ". \nDigite uma nova jornada:");
+						double distanciaAdicionalComb = scanner.nextDouble();
+						naveGuerra.viajar(distanciaAdicionalComb); //Método para atualizar o combustivel da nave
+						distanciaComb = distanciaComb + distanciaAdicionalComb; 
+						System.out.println(naveGuerra.toString());
 						break;
 					}
 					default:
